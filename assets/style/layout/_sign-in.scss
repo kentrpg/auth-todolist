@@ -1,0 +1,111 @@
+.sign-in {
+  &-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: start;
+    background-color: #FFD370;
+    padding-top: 3rem;
+  }
+  &-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 1.5rem;
+  }
+  &-imagery {
+    text-align: center;
+    &-logo {
+      margin-bottom: 1rem;
+    }
+    &-introduction {
+      display: none;
+    }
+  }
+}
+
+.auth-form {
+  width: 304px;
+  flex-basis: 50%;
+  flex-shrink: 0;
+  font-weight: 700;
+  &-title {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.25rem;
+  }
+  &-input-wrapper {
+    margin-bottom: 1rem;
+    .form-label {
+      margin-bottom: .25rem;
+    }
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #333333;
+      background-color: #fff;
+      background-clip: padding-box;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      border-radius: 10px;
+    }
+    .form-text {
+      font-size: .875rem;
+      color: #D87355;
+      margin-top: .25rem;
+      transition: opacity 0.15s ease;
+      opacity: 1;
+      &:empty {
+        opacity: 0;
+      }
+    }
+  }
+  &-footer {
+    margin-top: 1.5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    row-gap: 1.5rem;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .auth-form {
+    flex-basis: auto;
+    flex-shrink: 1;
+    &-title {
+      font-size: 1.5rem;
+    }
+  }
+}
+@media screen and (min-width: 768px) {
+  .auth-form {
+    &-title {
+      text-align: left;
+      margin-bottom: 1.5rem;
+    }
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .sign-in {
+    &-container {
+      flex-direction: row;
+    }
+    &-imagery-introduction {
+      display: block;
+    }
+  }
+}
+@media screen and (min-width: 567px) {
+  .sign-in {
+    &-wrapper {
+      align-items: center;
+      padding-top: 0;
+    } 
+  }
+}

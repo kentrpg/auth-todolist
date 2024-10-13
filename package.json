@@ -1,0 +1,14 @@
+{
+  "name": "auth-todolist",
+  "version": "1.0.0",
+  "description": "API串接 | 註冊登入 | 新增刪除代辦",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^5.3.3"
+  }
+}

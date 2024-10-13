@@ -1,0 +1,289 @@
+$primary: #FFD370;
+$secondary: #333333;
+$gray: #9F9A91;
+
+@keyframes swing {
+  0%, 100% { transform: translateX(0) rotate(0deg); }
+  6.25% { transform: translateX(-15px) rotate(-5deg); }
+  12.5% { transform: translateX(15px) rotate(5deg); }
+  18.75% { transform: translateX(-15px) rotate(-5deg); }
+  25% { transform: translateX(15px) rotate(5deg); }
+  31.25% { transform: translateX(-15px) rotate(-5deg); }
+  37.5% { transform: translateX(15px) rotate(5deg); }
+  43.75% { transform: translateX(-15px) rotate(-5deg); }
+  50% { transform: translateX(15px) rotate(5deg); }
+  56.25% { transform: translateX(-15px) rotate(-5deg); }
+  62.5% { transform: translateX(15px) rotate(5deg); }
+  72% { transform: translateX(-10px) rotate(-2deg); }
+  74% { transform: translateX(10px) rotate(2deg); }
+  76% { transform: translateX(-12px) rotate(-3deg); }
+  78% { transform: translateX(12px) rotate(3deg); }
+  80% { transform: translateX(-14px) rotate(-4deg); }
+  82% { transform: translateX(14px) rotate(4deg); }
+  84% { transform: translateX(-16px) rotate(-5deg); }
+  86% { transform: translateX(16px) rotate(5deg); }
+  90% { transform: translateX(-18px) rotate(-6deg); }
+}
+
+.loading {
+  position: fixed;
+  opacity: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 211, 112); // 半透明的 #FFD370
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; // 確保它在最上層
+  transition: opacity 0.5s ease-out; // 為淡出效果添加過渡
+
+  img {
+    max-width: 240px;
+    animation: swing 2s ease-in-out infinite; // 添加晃動動畫
+  }
+}
+
+.todo {
+  &-wrapper {
+    text-align: center;
+    padding-top: 1.5rem;
+  }
+  &-list-wrapper {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    margin-top: 1rem;
+    opacity: 0;
+    transition: opacity .3s ease,
+    display .2s ease allow-discrete;
+    &.open {
+      opacity: 1;
+      display: block;
+    }
+  }
+  &-list {
+    border-radius: 0 0 10px 10px;
+    background-color: #fff;
+    // box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+    padding: .5rem 1rem 1rem;
+  }
+  &-list-ul {
+    // display: flex;
+    margin-bottom: 1rem;
+  }
+  &-list-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #dee2e6;
+    .checkbox {
+      user-select: none;
+      cursor: pointer;
+    }
+    .input {
+      width: 100%;
+      font-size: .875rem;
+      color: $secondary;
+      margin-right: auto;
+      padding: 1rem 0 1rem 1rem;
+    }
+    .checked {
+      color: $gray;
+      text-decoration: line-through;
+    }
+  }
+  &-list-empty {
+    display: none;
+    font-weight: 400;
+    margin-top: 3.75rem;
+    opacity: 0.1;
+    transition: opacity .4s ease,
+    display .1s ease allow-discrete;
+    &.open {
+      opacity: 1;
+      display: block;
+    }
+    &-img {
+      margin-top: 1rem;
+    }
+  }
+  &-list-nav {
+    display: flex;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 10px 10px 0 0;
+    .btn {
+      font-size: .875rem;
+      font-weight: 700;
+      padding: 1rem .75rem;
+      // padding: 0;
+      width: 100%;
+    }
+    &-item {
+      width: 100%;
+      cursor: pointer;
+      border-bottom: 2px solid #efefef;
+    }
+    &-item.active, &-item:hover {
+      font-weight: bold;
+      color: $secondary;
+      border-bottom: 2px solid $secondary;
+      transition: .4s;
+    }
+  }
+  &-list-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 400;
+    .todos-count {
+      margin-right: .25rem;
+    } 
+  }
+}
+
+// empty
+@starting-style {
+  .todo-list-empty.open {
+    opacity: 0;
+  }
+  .todo-list-wrapper.open {
+    opacity: 0;
+  }
+}
+
+// input add
+.todo-input {
+  width: 100%;
+  padding: .75rem .25rem .75rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #575756;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.15);
+  
+  &::placeholder {
+    color: $gray;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  &-wrapper {
+    position: relative;
+    width: 100%;
+  }
+  &-add-btn {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    background-color: $secondary;
+    color: #ffffff;
+    border-radius: 10px;
+    font-size: 40px;
+    cursor: pointer;
+  }
+}
+
+// input checkbox
+.input:focus {
+  color: #333333;
+  text-decoration: none;
+  transition: all 0.15s ease-out 0s;
+}
+
+/* 確保 focus 樣式優先於 checked 樣式 */
+.checkbox:has(.option-input:checked) ~ .input:focus {
+  color: #333333;
+  text-decoration: none;
+}
+
+.option-input {
+  height: 20px;
+  width: 20px;
+  position: relative;
+  top: 2px;
+  z-index: 10;
+  border-radius: 5px;
+  border: 1px solid $gray;
+  outline: none;
+  color: #fff;
+  appearance: none;
+  transition: all 0.15s ease-out 0s;
+  margin: 0;
+  &:checked {
+    border: none;
+  }
+  &:checked::before {
+    content: '\e5ca';
+    width: 20px;
+    height: 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position: absolute;
+    font-family:'Material Icons';
+    font-size: 25px;
+    font-weight:bold;
+    color: $primary;
+  }
+  &:checked::after {
+    animation: click-wave 0.65s;
+    background: $primary;
+    content: '';
+    display: block;
+    position: relative;
+    z-index: 10;
+  }
+}
+
+.checkbox:has(.option-input:checked) ~ .input {
+  color: $gray;
+  text-decoration: line-through;
+  transition: all 0.15s ease-out 0s;
+}
+
+@keyframes click-wave {
+  0% {
+    height: 20px;
+    width: 20px;
+    opacity: 0.35;
+    position: relative;
+  }
+  100% {
+    height: 40px;
+    width: 40px;
+    margin-left: -10px;
+    margin-top: -10px;
+    opacity: 0;
+  }
+}
+
+.delete {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  transform: none;
+  background: url("/assets/images/delete.jpg") center / 16px no-repeat;
+  margin: 0;
+  padding: 1.5rem 1rem;
+  transition: all 0.1s ease-out 0s;
+}
+.input:hover + .checkbox>.delete, .delete:hover {
+  opacity: 0.7;
+}
+.input:focus + .checkbox>.delete {
+  opacity: 1;
+}
+
+@media screen and (min-width: 567px) {
+  .todo-list {
+    padding: .5rem 3rem 1.5rem 1.5rem;
+  }
+  .delete {
+    padding: 1.5rem;
+    transform: translateX(48px);
+  }
+}

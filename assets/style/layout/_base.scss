@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans TC', sans-serif;
+	line-height: 1.5;
+	font-weight: 700;
+  color: #333333;
+}
+ol, ul {
+	list-style: none;
+  padding: 0;
+}
+
+label {
+  display: inline-block;
+}
+
+a {
+  display: block;
+  text-decoration: none;
+  color: #333333;
+}
+
+img {
+  vertical-align: middle;
+  max-width: 100%;
+  height: auto;
+}
+
+input {
+  outline: none;
+  border: none;
+  appearance: none;
+}
+
+// cursor override
+h1, h2, h3, h4, h5, h6, div, span, p {
+  cursor: default;
+}
+
+a, label, button, select, textarea {
+  cursor: pointer;
+  & * {
+    cursor: pointer;
+  }
+}

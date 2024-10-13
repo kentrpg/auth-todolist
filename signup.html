@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/assets/images/plus.png" type="image/x-icon">
+  <title>sign up</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/style/css/all.css">
+</head>
+
+<body>
+  <div class="sign-in-wrapper">
+    <div class="container-781">
+      <div class="sign-in-container">
+        <div class="sign-in-imagery">
+          <img src="./assets/images/logo_lg.png" alt="logo_lg" class="sign-in-imagery-logo" />
+          <img src="./assets/images/img.png" alt="img" class="sign-in-imagery-introduction" />
+        </div>
+        <div class="auth-form">
+          <h2 class="auth-form-title">註冊帳號</h2>
+          <form>
+            <div class="auth-form-input-wrapper">
+              <label for="signupEmail" class="form-label">Email</label>
+              <input type="email" class="form-control" id="signupEmail" aria-describedby="emailHelp"
+                placeholder="請輸入Email" />
+              <div id="messageHelp" class="form-text"></div>
+            </div>
+            <div class="auth-form-input-wrapper">
+              <label for="name" class="form-label">您的暱稱</label>
+              <input type="text" class="form-control" id="name" placeholder="請輸入您的暱稱" />
+              <div id="messageHelp" class="form-text"></div>
+            </div>
+            <div class="auth-form-input-wrapper">
+              <label for="password" class="form-label">密碼</label>
+              <input type="password" class="form-control" id="password" placeholder="請輸入密碼" />
+              <div id="messageHelp" class="form-text"></div>
+            </div>
+            <div class="auth-form-input-wrapper">
+              <label for="passwordDoubleCheck" class="form-label">再次輸入密碼</label>
+              <input type="password" class="form-control" id="passwordDoubleCheck" placeholder="請輸入密碼" />
+              <div id="messageHelp" class="form-text"></div>
+            </div>
+            <div class="auth-form-footer">
+              <button type="submit" class="btn-secondary">註冊帳號</button>
+              <a href="signin.html">登入</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"></script>
+  <script src="./assets/js/signup.js" type="module"></script>
+</body>
+
+</html>

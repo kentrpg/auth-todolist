@@ -1,0 +1,41 @@
+.d-none {
+  display: none;
+}
+
+.d-block {
+  display: block;
+}
+
+.opacity-0 {
+  opacity: 0;
+}
+
+.opacity-1 {
+  opacity: 1;
+}
+
+.btn {
+  border: none;
+  background-color: transparent;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 0;
+}
+
+.btn-text-secondary {
+  color: $secondary;
+}
+
+.btn-text-gray {
+  color: #9F9A91;
+}
+
+.btn-secondary {
+  background-color: $secondary;
+  border: none;
+  font-weight: 700;
+  color: #FFF;
+  border-radius: 10px;
+  padding: .75rem 3rem;
+}
+
