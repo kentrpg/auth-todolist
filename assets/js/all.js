@@ -149,15 +149,16 @@ function addEventToLogout() {
 }
 
 function addEventToAddTodo(todoList) {
-  const addButton = document.getElementById('addTodo');
-  const todoInput = document.querySelector('.todo-input');
-
-  addButton.addEventListener('click', () => handleAddTodo(todoInput, todoList));
-  todoInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-      handleAddTodo(todoInput, todoList);
+  const todoInputWrapper = document.querySelector('.todo-input-wrapper');
+  // todoInputWrapper.addEventListener('change', (event) => handleInputChange(event.target, todoList));
+  todoInputWrapper.addEventListener('click', (event) => handleAddTodo(event, todoList));
+  todoInputWrapper.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter' && event.target.classList.contains('todo-input')) {
+      console.log('keypress');
+      handleInputChange(event.target, todoList);
     }
   });
+  
 }
 
 function addEventToClearTodos(todoList) {
@@ -240,17 +241,31 @@ async function handleTodoList(data, isEmpty, todoList) {
   }
 }
 
-async function handleAddTodo(inputElement, todoList) {
-  const inputValue = inputElement.value.trim();
-  console.log(inputValue, activeTodosCount);
+async function handleInputChange(inputElement, todoList) {
+console.log("handleInputChange:", inputElement);
+  if (inputElement.classList.contains('todo-input')) {
+    const inputValue = inputElement.value.trim();
+    console.log('handleInputChange:', inputValue, inputElement);
+    inputElement.value = '';
+    if (!activeTodosCount) {
+      handleTodoList([], false, todoList);
+    }
+    await addTodo(inputValue, todoList);
+  }
+}
+
+
+async function handleAddTodo(event) {
+  if (event.target.id !== 'addTodo') return;
+  const inputElement = event.target.previousElementSibling;
+  const inputValue = event.target.previousElementSibling.value.trim();
+  console.log("handleAddTodo:", inputElement, inputValue);
+
   if (inputValue) {
     if (!activeTodosCount) {
-      if (!todoListWrapper.classList.contains('open')) {
-        todoListWrapper.classList.add('open');
-      }
-      todoListEmpty.classList.remove('open');
+      await handleTodoList([], false, todoList);
     }
-    addTodo(inputValue, todoList);
+    await addTodo(inputValue, todoList);
     inputElement.value = '';
   } else {
     await Swal.fire('輸入框內容不可為空白', '', 'warning');
@@ -458,7 +473,7 @@ async function main() {
       document.addEventListener('DOMContentLoaded', () => {
         // const todoList = document.querySelector('.todo-list-ul');
         console.log('DOM 尚未加載完成', todoList);
-        initializeUI(todoList);
+        // initializeUI(todoList);
         updateUIWithData(todos, todoList);
         initUI(todos);
       });
@@ -466,7 +481,7 @@ async function main() {
       // 如果 DOM 已經加載完成，直接執行
       // const todoList = document.querySelector('.todo-list-ul');
       console.log('DOM 加載完成', todoList);
-      initializeUI(todoList);
+      // initializeUI(todoList);
       updateUIWithData(todos, todoList);
       initUI(todos);
     }
