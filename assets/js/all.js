@@ -331,18 +331,27 @@ async function addTodo(inputValue, todoList) {
 async function checkAuthorization() {
   try {
     await check_account();
+    return true;
   } catch (error) {
     await Swal.fire({
       title: '驗證失敗',
       text: '請先登入',
       icon: 'warning',
-      timer: 2000,
+      timer: 2500,
       showConfirmButton: false,
       didOpen: () => {
         Swal.getPopup().style.zIndex = 9999;
+        const loadingImage = document.getElementById('loadingImage');
+        if (loadingImage) {
+          loadingImage.classList.add('d-none');
+        }
+      },
+      willClose: () => {
+        console.log('SweetAlert 即將關閉');
       }
     });
     window.location.href = 'signin.html';
+    return false;
   }
 }
 
@@ -417,7 +426,9 @@ function handleInitialize() {
 
 // 1. 初始化基本設置和數據獲取
 async function initializeApp() {
-  await checkAuthorization();
+  // await checkAuthorization();
+  const isAuthorized = await checkAuthorization();
+  if (!isAuthorized) return;
   getStorage();
   const todos = await fetchTodos();
   activeTodosCount = todos.length;
@@ -444,11 +455,12 @@ function updateUIWithData(todos, todoList) {
   root.style.setProperty('--base-url', deleteBackgroundUrl);
 }
 
-function initUI(todos) {
-  const todoList = document.querySelector('.todo-list-ul');
+function initUI(todoList) {
+  // const todoList = document.querySelector('.todo-list-ul');
   initializeUI(todoList);
-  updateUIWithData(todos, todoList);
+  // updateUIWithData(todos, todoList);
   fadeOutLoading();
+  document.querySelector('.loading').classList.add('d-none');
 }
 
 function fadeOutLoading() {
@@ -466,19 +478,23 @@ function fadeOutLoading() {
 async function main() {
   try {
     const todos = await initializeApp();
+    console.log(todos);
+    if (!todos) return; // 避免 checkAuthorization 失敗還繼續執行
     
     // 等待 DOM 加載完成
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
         // const todoList = document.querySelector('.todo-list-ul');
         console.log('DOM 尚未加載完成', todoList);
-        initUI(todos);
+        updateUIWithData(todos, todoList);
+        initUI(todoList);
       });
     } else {
       // 如果 DOM 已經加載完成，直接執行
       // const todoList = document.querySelector('.todo-list-ul');
       console.log('DOM 加載完成', todoList);
-      initUI(todos);
+      updateUIWithData(todos, todoList);
+      initUI(todoList);
     }
   } catch (error) {
     console.error('初始化應用程序時發生錯誤：', error);
