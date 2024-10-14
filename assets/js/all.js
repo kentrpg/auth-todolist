@@ -336,8 +336,11 @@ async function checkAuthorization() {
       title: '驗證失敗',
       text: '請先登入',
       icon: 'warning',
-      timer: 3000,
-      showConfirmButton: false
+      timer: 2000,
+      showConfirmButton: false,
+      didOpen: () => {
+        Swal.getPopup().style.zIndex = 9999;
+      }
     });
     window.location.href = 'signin.html';
   }
@@ -435,13 +438,16 @@ function initializeUI(todoList) {
 function updateUIWithData(todos, todoList) {
   console.log('updateUIWithData', todos, todoList);
   handleTodoList(todos, todos.length === 0, todoList);
+  const isGitHubPages = window.location.hostname.includes('github.io');
+  const root = document.documentElement;
+  const deleteBackgroundUrl = isGitHubPages ? '/auth-todolist/assets/images/delete.jpg' : 'url("/assets/images/delete.jpg")';
+  root.style.setProperty('--base-url', deleteBackgroundUrl);
 }
 
 function initUI(todos) {
   const todoList = document.querySelector('.todo-list-ul');
   initializeUI(todoList);
   updateUIWithData(todos, todoList);
-  
   fadeOutLoading();
 }
 
@@ -466,16 +472,12 @@ async function main() {
       document.addEventListener('DOMContentLoaded', () => {
         // const todoList = document.querySelector('.todo-list-ul');
         console.log('DOM 尚未加載完成', todoList);
-        // initializeUI(todoList);
-        updateUIWithData(todos, todoList);
         initUI(todos);
       });
     } else {
       // 如果 DOM 已經加載完成，直接執行
       // const todoList = document.querySelector('.todo-list-ul');
       console.log('DOM 加載完成', todoList);
-      // initializeUI(todoList);
-      updateUIWithData(todos, todoList);
       initUI(todos);
     }
   } catch (error) {

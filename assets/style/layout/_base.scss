@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --base-url: #{$base-url};
+}
+
 body {
   font-family: 'Noto Sans TC', sans-serif;
 	line-height: 1.5;
