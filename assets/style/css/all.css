@@ -340,10 +340,7 @@ a *, label *, button *, select *, textarea * {
 }
 
 @starting-style {
-  .todo-list-empty.open {
-    opacity: 0;
-  }
-  .todo-list-wrapper.open {
+  .todo-list-empty.open, .todo-list-wrapper.open {
     opacity: 0;
   }
 }

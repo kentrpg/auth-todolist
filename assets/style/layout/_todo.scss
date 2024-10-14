@@ -112,7 +112,6 @@
       font-size: .875rem;
       font-weight: 700;
       padding: 1rem .75rem;
-      // padding: 0;
       width: 100%;
     }
     &-item {
@@ -140,10 +139,7 @@
 
 // empty
 @starting-style {
-  .todo-list-empty.open {
-    opacity: 0;
-  }
-  .todo-list-wrapper.open {
+  .todo-list-empty.open, .todo-list-wrapper.open {
     opacity: 0;
   }
 }
@@ -183,14 +179,14 @@
 
 // input checkbox
 .input:focus {
-  color: #333333;
+  color: $secondary;
   text-decoration: none;
   transition: all 0.15s ease-out 0s;
 }
 
 /* 確保 focus 樣式優先於 checked 樣式 */
 .checkbox:has(.option-input:checked) ~ .input:focus {
-  color: #333333;
+  color: $secondary;
   text-decoration: none;
 }
 
@@ -261,9 +257,7 @@
   right: 0;
   opacity: 0;
   transform: none;
-  // background-image: url(var(--base-url));
   background: var(--base-url) center / 16px no-repeat;
-  // background: url("/assets/images/delete.jpg") center / 16px no-repeat;
   margin: 0;
   padding: 1.5rem 1rem;
   transition: all 0.1s ease-out 0s;

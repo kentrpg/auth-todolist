@@ -341,16 +341,15 @@ async function checkAuthorization() {
       showConfirmButton: false,
       didOpen: () => {
         Swal.getPopup().style.zIndex = 9999;
+      },
+      willClose: () => {
         const loadingImage = document.getElementById('loadingImage');
         if (loadingImage) {
           loadingImage.classList.add('d-none');
         }
-      },
-      willClose: () => {
-        console.log('SweetAlert 即將關閉');
+        window.location.href = 'signin.html';
       }
     });
-    window.location.href = 'signin.html';
     return false;
   }
 }
