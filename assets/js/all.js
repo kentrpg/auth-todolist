@@ -343,10 +343,6 @@ async function checkAuthorization() {
         Swal.getPopup().style.zIndex = 9999;
       },
       willClose: () => {
-        const loadingImage = document.getElementById('loadingImage');
-        if (loadingImage) {
-          loadingImage.classList.add('d-none');
-        }
         window.location.href = 'signin.html';
       }
     });
