@@ -151,11 +151,11 @@ function addEventToLogout() {
 function addEventToAddTodo(todoList) {
   const todoInputWrapper = document.querySelector('.todo-input-wrapper');
   // todoInputWrapper.addEventListener('change', (event) => handleInputChange(event.target, todoList));
-  todoInputWrapper.addEventListener('click', (event) => handleAddTodo(event, todoList));
+  todoInputWrapper.addEventListener('click', (event) => handleAddButtonClick(event, todoList));
   todoInputWrapper.addEventListener('keypress', (event) => {
     if (event.key === 'Enter' && event.target.classList.contains('todo-input')) {
       console.log('keypress');
-      handleInputChange(event.target, todoList);
+      handleTodoInputChange(event.target, todoList);
     }
   });
   
@@ -241,35 +241,28 @@ async function handleTodoList(data, isEmpty, todoList) {
   }
 }
 
-async function handleInputChange(inputElement, todoList) {
-console.log("handleInputChange:", inputElement);
-  if (inputElement.classList.contains('todo-input')) {
-    const inputValue = inputElement.value.trim();
-    console.log('handleInputChange:', inputValue, inputElement);
-    inputElement.value = '';
-    if (!activeTodosCount) {
-      handleTodoList([], false, todoList);
-    }
-    await addTodo(inputValue, todoList);
-  }
-}
-
-
-async function handleAddTodo(event) {
-  if (event.target.id !== 'addTodo') return;
-  const inputElement = event.target.previousElementSibling;
-  const inputValue = event.target.previousElementSibling.value.trim();
-  console.log("handleAddTodo:", inputElement, inputValue);
-
+async function processAddTodo(inputValue, inputElement, todoList) {
+  inputElement.value = '';
   if (inputValue) {
     if (!activeTodosCount) {
       await handleTodoList([], false, todoList);
     }
     await addTodo(inputValue, todoList);
-    inputElement.value = '';
   } else {
     await Swal.fire('輸入框內容不可為空白', '', 'warning');
   }
+}
+
+async function handleTodoInputChange(inputElement, todoList) {
+  const inputValue = inputElement.value.trim();
+  processAddTodo(inputValue, inputElement, todoList);
+}
+
+async function handleAddButtonClick(event, todoList) {
+  if (event.target.id !== 'addTodo') return;
+  const inputElement = event.target.previousElementSibling;
+  const inputValue = event.target.previousElementSibling.value.trim();
+  processAddTodo(inputValue, inputElement, todoList);
 }
 
 async function renderTodoList(todos, todoList) {
