@@ -1,10 +1,3 @@
-$container-max-widths: (
-  sm: 500px,
-  md: 781px,
-  lg: 962px,
-  xl: 1140px,
-);
-
 .container-962, .container-781, .container-500 {
   --gutter-x: 32px;
   width: 100%;
